@@ -3,7 +3,7 @@
 #include <MLV/MLV_all.h>
 #include "type.h"
 #include "vaisseau.h"
-
+#include "projectile.h"
 void dessin_plateau(){
   MLV_draw_filled_rectangle(0,0,T_FENETRE_X,T_FENETRE_Y,MLV_COLOR_BLACK);
   MLV_draw_rectangle(0,25,T_FENETRE_X,T_FENETRE_Y-125,MLV_COLOR_RED);
@@ -16,12 +16,16 @@ void dessin_barre_vie(int vie){
   }
 }
 
-int jeu(vaisseau v){
+int jeu(vaisseau v, projectiles p){
   while(1){
     dessin_plateau();
     dessin_barre_vie(2);
     dessin_vaisseau(v);
+    dessin_projectile(p);
     deplacement_vaisseau(&v);
+    deplacement_projectile(&p);
+    capture_piou_piou(v,&p);
+    verif_collision(&p);
     MLV_actualise_window();
     MLV_clear_window(MLV_COLOR_BLACK);
     MLV_wait_milliseconds(50);

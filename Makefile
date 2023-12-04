@@ -1,7 +1,7 @@
 CC= gcc
 OPTION = -W -Wall -std=c89 -pedantic -O3
 
-main :main.c jeu.o menu.o vaisseau.o
+main :main.c jeu.o menu.o vaisseau.o projectile.o
 	$(CC) $(OPTION) `pkg-config --cflags MLV` `pkg-config --libs-only-other --libs-only-L MLV` $^ `pkg-config --libs-only-l MLV` -o $@
 
 jeu.o : jeu.c
@@ -12,6 +12,9 @@ menu.o : menu.c
 
 vaisseau.o : vaisseau.c
 	$(CC) $(OPTION) -c $^
+
+projectile.o : projectile.c
+	$(CC) $(OPTION) -lm -c $^
 
 clean :                                                                         
 	rm -rf *.o *~ jeu

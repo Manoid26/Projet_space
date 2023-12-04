@@ -5,10 +5,13 @@
 #include "menu.h"
 #include "jeu.h"
 #include "vaisseau.h"
+#include "projectile.h"
 
 int main(){
   int continuer=0;
   vaisseau v;
+  projectiles p;
+  p.acc=0;
   MLV_create_window("Porjet_de_C","shoot",T_FENETRE_X,T_FENETRE_Y);
 
   while(continuer!=3){
@@ -19,7 +22,7 @@ int main(){
     case(1):
       printf("jouer\n");
       init_vaisseau(&v);
-      jeu(v);
+      jeu(v,p);
       break;
     case(2):
       printf("sauvegarder\n");
